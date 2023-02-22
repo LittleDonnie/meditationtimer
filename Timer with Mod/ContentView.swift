@@ -23,110 +23,120 @@ struct ContentView: View {
     
     
     var body: some View {
+        ZStack{
+        LinearGradient(
+            colors: [.yellow, .red],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        ).ignoresSafeArea()
         
-        VStack {
-            Spacer()
-            HStack{
-                Button("15 Minute")
-                {
-                    setTimerMinutesSeconds(minutes: 15, seconds: 0)
-                }
-                
-                .frame(width: 100, height: 50)
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(25)
-                .padding(.trailing, 10.0)
-                Button("30 Minute")
+
+            
+            VStack {
+                Spacer()
+                HStack{
+                    Button("15")
                     {
-                    setTimerMinutesSeconds(minutes: 30, seconds: 0)
+                        setTimerMinutesSeconds(minutes: 15, seconds: 0)
                     }
+                    .font(.title2)
+                    .frame(width: 100, height: 50)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(25)
+                    .padding(.trailing, 10.0)
+                    Button("30")
+                    {
+                        setTimerMinutesSeconds(minutes: 30, seconds: 0)
+                    }.font(.title2)
                     .frame(width: 100, height: 50)
                     .background(Color.blue)
                     .foregroundColor(.white)
                     .cornerRadius(25)
                     .padding(.leading, 10.0)
-            }
-            HStack{
-                Button("45 Minutes")
+                }
+                HStack{
+                    Button("45")
                     {
-                    setTimerMinutesSeconds(minutes: 45, seconds: 0)
-                    }
+                        setTimerMinutesSeconds(minutes: 45, seconds: 0)
+                    }.font(.title2)
                     .frame(width: 100, height: 50)
                     .background(Color.blue)
                     .foregroundColor(.white)
                     .cornerRadius(25)
                     .padding(.trailing, 10.0)
                     
-                Button("60 Minutes")
+                    Button("60")
                     {
-                    setTimerMinutesSeconds(minutes: 60, seconds: 0)
-                    }
+                        setTimerMinutesSeconds(minutes: 60, seconds: 0)
+                    }.font(.title2)
                     .frame(width: 100, height: 50)
                     .background(Color.blue)
                     .foregroundColor(.white)
                     .cornerRadius(25)
                     .padding(.leading, 10.0)
-            }
-            Spacer()
-            Text (textMinutes)
-                .font(.largeTitle)
-            Text (textSeconds)
-                .font(.largeTitle)
-            Spacer()
-                .onReceive(timer) { _ in
-                    if totalSeconds > 0 && timerRunning {
-                        // countDownTimerMinutes = (totalSeconds % 60)
-                        countDownTimerSeconds = totalSeconds % 60
-                        countDownTimerMinutes = (totalSeconds - countDownTimerSeconds) / 60
-                        totalSeconds -= 1
-                        if countDownTimerMinutes == 1{
-                            textMinutes =  String (countDownTimerMinutes) + " Minute"
+                }
+                Spacer()
+                Text (textMinutes)
+                    .font(.largeTitle)
+                Text (textSeconds)
+                    .font(.largeTitle)
+                Spacer()
+                    .onReceive(timer) { _ in
+                        if totalSeconds > 0 && timerRunning {
+                            // countDownTimerMinutes = (totalSeconds % 60)
+                            countDownTimerSeconds = totalSeconds % 60
+                            countDownTimerMinutes = (totalSeconds - countDownTimerSeconds) / 60
+                            totalSeconds -= 1
+                            if countDownTimerMinutes == 1{
+                                textMinutes =  String (countDownTimerMinutes) + " Minute"
+                            }
+                            else {
+                                textMinutes =  String (countDownTimerMinutes) + " Minutes"
+                            }
+                            textSeconds = String (countDownTimerSeconds) + " Seconds"
+                            
                         }
                         else {
-                            textMinutes =  String (countDownTimerMinutes) + " Minutes"
+                            timerRunning = false
                         }
-                        textSeconds = String (countDownTimerSeconds) + " Seconds"
-                        
                     }
-                    else {
-                        timerRunning = false
-                    }
-                }
-            
-            HStack{
-                Button(leftButtonText) {
-                    if (timerRunning == false){
-                        timerRunning = true
-                        leftButtonText = "Pause"
-                        
+                Text("Meditation Time: 31:59")
+                    .font(.title2)
+                HStack{
+                    Button(leftButtonText) {
+                        if (timerRunning == false){
+                            timerRunning = true
+                            leftButtonText = "Pause"
+                            
                         }
-                    else{
+                        else{
+                            timerRunning = false
+                            leftButtonText = "Resume"
+                            
+                        }
+                    }.font(.title)
+                        .frame(width: 150, height: 100 )
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(25)
+                    Button("Stop") {
                         timerRunning = false
-                        leftButtonText = "Resume"
-                        
+                        countDownTimerSeconds = 0
+                        countDownTimerMinutes = 0
+                        textMinutes = "0 Minutes"
+                        textSeconds = "0 Seconds"
+                        leftButtonText = "Start"
                     }
-                }.font(.title)
-                .frame(width: 150, height: 100 )
-                .background(Color.red)
-                .foregroundColor(.white)
-                .cornerRadius(25)
-                Button("Stop") {
-                    timerRunning = false
-                    countDownTimerSeconds = 0
-                    countDownTimerMinutes = 0
-                    textMinutes = "0 Minutes"
-                    textSeconds = "0 Seconds"
-                    leftButtonText = "Start"
+                    .font(.title)
+                    .frame(width: 150, height: 100 )
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(25)
                 }
-                .font(.title)
-                .frame(width: 150, height: 100 )
-                .background(Color.red)
-                .foregroundColor(.white)
-                .cornerRadius(25)
+                Spacer()
             }
-            Spacer()
-            }
+        }
            
         
     }
