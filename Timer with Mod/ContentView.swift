@@ -14,6 +14,7 @@ struct ContentView: View {
     @State  var totalSeconds = 0
     @State  var textMinutes = "0 Minutes"
     @State  var textSeconds = "0 Seconds"
+    @State  var leftButtonText = "Start"
     
     
     
@@ -24,43 +25,49 @@ struct ContentView: View {
     var body: some View {
         
         VStack {
-            Button("1 Minute")
-            {   countDownTimerSeconds = 0
-                countDownTimerMinutes = 1
-                totalSeconds = (countDownTimerMinutes * 60)
-                textSeconds = "0 Seconds"
-                textMinutes = "1 Minute"
-
+            Spacer()
+            HStack{
+                Button("15 Minute")
+                {
+                    setTimerMinutesSeconds(minutes: 15, seconds: 0)
+                }
                 
+                .frame(width: 100, height: 50)
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(25)
+                .padding(.trailing, 10.0)
+                Button("30 Minute")
+                    {
+                    setTimerMinutesSeconds(minutes: 30, seconds: 0)
+                    }
+                    .frame(width: 100, height: 50)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(25)
+                    .padding(.leading, 10.0)
             }
-            .frame(width: 100, height: 50)
-            .background(Color.blue)
-            .foregroundColor(.white)
-            .cornerRadius(25)
-            .padding(.top, 50.0)
-            
-            Button("15 Minute")
-            {   countDownTimerSeconds = 0
-                countDownTimerMinutes = 15
-                totalSeconds = (countDownTimerMinutes * 60)
-                textSeconds = "0 Seconds"
-                textMinutes = "15 Minutes"
+            HStack{
+                Button("45 Minutes")
+                    {
+                    setTimerMinutesSeconds(minutes: 45, seconds: 0)
+                    }
+                    .frame(width: 100, height: 50)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(25)
+                    .padding(.trailing, 10.0)
+                    
+                Button("60 Minutes")
+                    {
+                    setTimerMinutesSeconds(minutes: 60, seconds: 0)
+                    }
+                    .frame(width: 100, height: 50)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(25)
+                    .padding(.leading, 10.0)
             }
-            .frame(width: 100, height: 50)
-            .background(Color.blue)
-            .foregroundColor(.white)
-            .cornerRadius(25)
-            Button("30 Minutes")
-            {   countDownTimerSeconds = 0
-                countDownTimerMinutes = 30
-                totalSeconds = (countDownTimerMinutes * 60)
-                textSeconds = "0 Seconds"
-                textMinutes = "30 Minutes"
-            }
-            .frame(width: 100, height: 50)
-            .background(Color.blue)
-            .foregroundColor(.white)
-            .cornerRadius(25)
             Spacer()
             Text (textMinutes)
                 .font(.largeTitle)
@@ -86,23 +93,53 @@ struct ContentView: View {
                         timerRunning = false
                     }
                 }
-            Button("Start") {
-                timerRunning = true
+            
+            HStack{
+                Button(leftButtonText) {
+                    if (timerRunning == false){
+                        timerRunning = true
+                        leftButtonText = "Pause"
+                        
+                        }
+                    else{
+                        timerRunning = false
+                        leftButtonText = "Resume"
+                        
+                    }
+                }.font(.title)
+                .frame(width: 150, height: 100 )
+                .background(Color.red)
+                .foregroundColor(.white)
+                .cornerRadius(25)
+                Button("Stop") {
+                    timerRunning = false
+                    countDownTimerSeconds = 0
+                    countDownTimerMinutes = 0
+                    textMinutes = "0 Minutes"
+                    textSeconds = "0 Seconds"
+                    leftButtonText = "Start"
+                }
+                .font(.title)
+                .frame(width: 150, height: 100 )
+                .background(Color.red)
+                .foregroundColor(.white)
+                .cornerRadius(25)
             }
-            .frame(width: 150, height: 50 )
-            .background(Color.red)
-            .foregroundColor(.white)
-            .cornerRadius(25)
-            Button("Stop") {
-                timerRunning = false
-            }
-            .frame(width: 150, height: 50 )
-            .background(Color.red)
-            .foregroundColor(.white)
-            .cornerRadius(25)
             Spacer()
-        }
+            }
+           
+        
     }
+    
+    func setTimerMinutesSeconds(minutes: Int, seconds: Int ){
+        countDownTimerSeconds = seconds
+        countDownTimerMinutes = minutes
+        totalSeconds = minutes*60 + seconds
+        textSeconds = String(seconds) + " Seconds"
+        textMinutes = String(minutes) + " Minutes"
+        
+    }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
