@@ -17,6 +17,17 @@ struct ContentView: View {
     @State  var leftButtonText = "Start"
     @State  var meditationTime = "0:00"
     @State  var meditationTimeInt = 0
+    @State  var selectedIndex = "1"
+    
+    private let numberOfIntervals: [String] = [
+        "1 Iinterval",
+        "2 Iintervals",
+        "3 Intervals"
+    ]
+    @State private var selectedInterval: String = "1 Iinterval"
+    
+    
+    
     
     
     
@@ -36,52 +47,59 @@ struct ContentView: View {
                 Text("Select Minutes to Meditate")
                     .font(.title2)
                     .padding(.top, 40.0)
+                    .padding(.bottom, 20.0)
                 HStack{
-                    Button("15")
-                    {
+                    Button("15"){
                         setTimerMinutesSeconds(minutes: 15, seconds: 0)
-                    }
-                    .font(.title2)
-                    .frame(width: 100, height: 50)
-                    .background(Color(hue: 0.641, saturation: 0.496, brightness: 0.599))
-                    .opacity(0.8)
-                    .foregroundColor(.white)
-                    .cornerRadius(25)
-                    .padding(.trailing, 10.0)
-                    Button("30")
-                    {
+                        }
+                        .font(.title2)
+                        .frame(width: 100, height: 50)
+                        .background(Color(hue: 0.641, saturation: 0.496, brightness: 0.599))
+                        .opacity(0.8)
+                        .foregroundColor(.white)
+                        .cornerRadius(25)
+                        .padding(.trailing, 10.0)
+                    Button("30"){
                         setTimerMinutesSeconds(minutes: 30, seconds: 0)
-                    }.font(.title2)
-                    .frame(width: 100, height: 50)
-                    .background(Color(hue: 0.641, saturation: 0.496, brightness: 0.599))
-                    .opacity(0.8)
-                    .foregroundColor(.white)
-                    .cornerRadius(25)
-                    .padding(.leading, 10.0)
+                        }
+                        .font(.title2)
+                        .frame(width: 100, height: 50)
+                        .background(Color(hue: 0.641, saturation: 0.496, brightness: 0.599))
+                        .opacity(0.8)
+                        .foregroundColor(.white)
+                        .cornerRadius(25)
+                        .padding(.leading, 10.0)
                 }
                 HStack{
-                    Button("45")
-                    {
+                    Button("45"){
                         setTimerMinutesSeconds(minutes: 45, seconds: 0)
-                    }.font(.title2)
-                    .frame(width: 100, height: 50)
-                    .background(Color(hue: 0.641, saturation: 0.496, brightness: 0.599))
-                    .opacity(0.8)
-                    .foregroundColor(.white)
-                    .cornerRadius(25)
-                    .padding(.trailing, 10.0)
-                    
-                    Button("60")
-                    {
+                        }
+                        .font(.title2)
+                        .frame(width: 100, height: 50)
+                        .background(Color(hue: 0.641, saturation: 0.496, brightness: 0.599))
+                        .opacity(0.8)
+                        .foregroundColor(.white)
+                        .cornerRadius(25)
+                        .padding(.trailing, 10.0)
+                        
+                    Button("60"){
                         setTimerMinutesSeconds(minutes: 60, seconds: 0)
-                    }.font(.title2)
-                    .frame(width: 100, height: 50)
-                    .background(Color(hue: 0.641, saturation: 0.496, brightness: 0.599))
-                    .opacity(0.8)
-                    .foregroundColor(.white)
-                    .cornerRadius(25)
-                    .padding(.leading, 10.0)
-                }
+                        }
+                        .font(.title2)
+                        .frame(width: 100, height: 50)
+                        .background(Color(hue: 0.641, saturation: 0.496, brightness: 0.599))
+                        .opacity(0.8)
+                        .foregroundColor(.white)
+                        .cornerRadius(25)
+                        .padding(.leading, 10.0)
+                    }
+                Picker ("Choose an Interval", selection: $selectedInterval) {
+                    ForEach (numberOfIntervals, id: \.self) { intervals in
+                        Text (intervals)}
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .padding([.top, .leading, .trailing], 20.0)
+                
                 Spacer()
                 Text (textMinutes)
                     .font(.largeTitle)
@@ -90,31 +108,24 @@ struct ContentView: View {
                 Spacer()
                     .onReceive(timer) { _ in
                         if totalSeconds > 0 && timerRunning {
-                                meditationTimeInt += 1
-                            
-                            //caculate meditationTime (text) here
-                            
+                            meditationTimeInt += 1
                             meditationTime =   String (meditationTimeInt / 60) + ":"
-                            
                             if ( (meditationTimeInt % 60) <= 9) {
-                                meditationTime = (meditationTime + "0" + String (meditationTimeInt % 60))
-                                }
+                                    meditationTime = (meditationTime + "0" + String (meditationTimeInt % 60))
+                                    }
                             else { meditationTime = meditationTime + String (meditationTimeInt % 60)
-                                
-                            }
-                            
+                                }
                             countDownTimerSeconds = totalSeconds % 60
-                                countDownTimerMinutes = (totalSeconds - countDownTimerSeconds) / 60
-                                totalSeconds -= 1
+                            countDownTimerMinutes = (totalSeconds - countDownTimerSeconds) / 60
+                            totalSeconds -= 1
                             if countDownTimerMinutes == 1{
                                 textMinutes =  String (countDownTimerMinutes) + " Minute"
                                 }
                             else {
-                                textMinutes =  String (countDownTimerMinutes) + " Minutes"
-                                }
+                                    textMinutes =  String (countDownTimerMinutes) + " Minutes"
+                                    }
                             textSeconds = String (countDownTimerSeconds) + " Seconds"
-                            
-                        }
+                            }
                         else {
                             timerRunning = false
                         }
@@ -126,22 +137,23 @@ struct ContentView: View {
                         if (timerRunning == false){
                             timerRunning = true
                             leftButtonText = "Pause"
-
                         }
                         else{
                             timerRunning = false
                             leftButtonText = "Resume"
-
                         }
-                    }.font(.title)
-                        .frame(width: 150, height: 100 )
-                        .background(Color(hue: 0.641, saturation: 0.496, brightness: 0.599))
-                        .opacity(0.8)
-                        .foregroundColor(.white)
-                        .cornerRadius(25)
+                    }
+                    .font(.title)
+                    .frame(width: 150, height: 100 )
+                    .background(Color(hue: 0.641, saturation: 0.496, brightness: 0.599))
+                    .opacity(0.8)
+                    .foregroundColor(.white)
+                    .cornerRadius(25)
 
                     Button("Stop") {
                         timerRunning = false
+                        meditationTimeInt = 0
+                        meditationTime = "0:00"
                         countDownTimerSeconds = 0
                         countDownTimerMinutes = 0
                         meditationTimeInt = 0
