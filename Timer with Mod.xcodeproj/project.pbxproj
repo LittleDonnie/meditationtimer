@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B118ED229B00A5B0073FC54 /* oneChime.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8B118ED129B00A5B0073FC54 /* oneChime.mp3 */; };
+		8B4390C229ABDB0300677AFD /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4390C129ABDB0300677AFD /* Sound.swift */; };
+		8B5086B729AC0CAF007D0292 /* mellowchime.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8B5086B629AC0CAF007D0292 /* mellowchime.mp3 */; };
 		8BF8EA79299C055800A96FD3 /* Timer_with_ModApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF8EA78299C055800A96FD3 /* Timer_with_ModApp.swift */; };
 		8BF8EA7B299C055800A96FD3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF8EA7A299C055800A96FD3 /* ContentView.swift */; };
 		8BF8EA7D299C055900A96FD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BF8EA7C299C055900A96FD3 /* Assets.xcassets */; };
@@ -34,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8B118ED129B00A5B0073FC54 /* oneChime.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = oneChime.mp3; sourceTree = "<group>"; };
+		8B4390C129ABDB0300677AFD /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
+		8B5086B629AC0CAF007D0292 /* mellowchime.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mellowchime.mp3; sourceTree = "<group>"; };
 		8BF8EA75299C055800A96FD3 /* Timer with Mod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Timer with Mod.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BF8EA78299C055800A96FD3 /* Timer_with_ModApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer_with_ModApp.swift; sourceTree = "<group>"; };
 		8BF8EA7A299C055800A96FD3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -94,9 +100,12 @@
 		8BF8EA77299C055800A96FD3 /* Timer with Mod */ = {
 			isa = PBXGroup;
 			children = (
+				8B4390C129ABDB0300677AFD /* Sound.swift */,
 				8BF8EA78299C055800A96FD3 /* Timer_with_ModApp.swift */,
 				8BF8EA7A299C055800A96FD3 /* ContentView.swift */,
 				8BF8EA7C299C055900A96FD3 /* Assets.xcassets */,
+				8B5086B629AC0CAF007D0292 /* mellowchime.mp3 */,
+				8B118ED129B00A5B0073FC54 /* oneChime.mp3 */,
 				8BF8EA7E299C055900A96FD3 /* Preview Content */,
 			);
 			path = "Timer with Mod";
@@ -232,6 +241,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BF8EA80299C055900A96FD3 /* Preview Assets.xcassets in Resources */,
+				8B5086B729AC0CAF007D0292 /* mellowchime.mp3 in Resources */,
+				8B118ED229B00A5B0073FC54 /* oneChime.mp3 in Resources */,
 				8BF8EA7D299C055900A96FD3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BF8EA7B299C055800A96FD3 /* ContentView.swift in Sources */,
+				8B4390C229ABDB0300677AFD /* Sound.swift in Sources */,
 				8BF8EA79299C055800A96FD3 /* Timer_with_ModApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
