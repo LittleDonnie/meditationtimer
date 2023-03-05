@@ -72,6 +72,7 @@ struct ContentView: View {
                     .padding(.leading, 10.0)
                 }
                 HStack{
+                    
                     Button("45"){
                         setTimerMinutesSeconds(minutes: 45, seconds: 0)
                     }
@@ -103,17 +104,34 @@ struct ContentView: View {
                         Text (intervals)}
                 }
                 .pickerStyle(SegmentedPickerStyle())
-                .padding([.top, .leading, .trailing], 20.0)
-                Spacer()
-                Text (textMinutes)
-                    .font(.largeTitle)
-                Text (textSeconds)
-                    .font(.largeTitle)
-                Spacer()
-                Text("Meditation Time: " + meditationTime)
-                    .font(.title2)
+                .padding([.leading, .trailing], 20.0)
+                .padding(.top, 40)
+            //    .padding(.bottom, 120.0)
+                
+               
+                ZStack{
+                    RoundedRectangle(cornerRadius: 25.0)
+                        .stroke(Color.black, lineWidth: 2.0)
+                        .frame(width: 300, height: 100)
+                    VStack{
+                        Text (textMinutes)
+                            .font(.largeTitle)
+                        Text (textSeconds)
+                            .font(.largeTitle)
+                    }
+                }.padding(.vertical, 50)
+               
+                
+                ZStack{
+                    RoundedRectangle(cornerRadius: 25.0)
+                        .stroke(Color.black, lineWidth: 2.0)
+                        .frame(width: 300, height: 100)
+                    Text("Meditation Time: " + meditationTime)
+                        .font(.title)
+                }.padding(.bottom, 50)
                 
                 // MARK: Start-Stop
+                
                 HStack{
                     Button(leftButtonText) {
                         if(leftButtonText == "Start"){
@@ -140,7 +158,7 @@ struct ContentView: View {
                     
                     Button("Stop") {
                         
-                        playSound(sound: "oneChime", type: "mp3")
+                       // playSound(sound: "oneChime", type: "mp3")
                         timerRunning = false
                         meditationTimeInt = 0
                         meditationTime = "0:00"
@@ -197,7 +215,8 @@ struct ContentView: View {
                         else {
                             if leftButtonText == "Pause"
                             {
-                                // set end of meditation
+                              
+
                                 textSeconds = "0 Seconds"
                                 timerRunning = false
                                 playSound(sound: "oneChime", type: "mp3")
